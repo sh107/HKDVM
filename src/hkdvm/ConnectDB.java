@@ -375,7 +375,7 @@ public class ConnectDB {
                     + "user=root&password=root");
             stmt = conn.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
               java.sql.ResultSet.CONCUR_READ_ONLY);
-            stmt.setFetchSize(size);
+            stmt.setFetchSize(Integer.MIN_VALUE);
             long ts = System.currentTimeMillis();
             Case c = new Case();
             String sql = c.getCase(number);
