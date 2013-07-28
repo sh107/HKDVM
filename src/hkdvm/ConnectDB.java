@@ -373,7 +373,8 @@ public class ConnectDB {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://146.169.35.107/data?"
                     + "user=root&password=root");
-            stmt = conn.createStatement();
+            stmt = conn.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+              java.sql.ResultSet.CONCUR_READ_ONLY);
             stmt.setFetchSize(size);
             long ts = System.currentTimeMillis();
             Case c = new Case();
