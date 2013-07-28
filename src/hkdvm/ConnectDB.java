@@ -366,7 +366,7 @@ public class ConnectDB {
 
     }
 
-    public void newsSelect(int number) throws Exception {
+    public void newsSelect(int number, int size) throws Exception {
         Connection conn = null;
         Statement stmt = null;
 
@@ -374,12 +374,12 @@ public class ConnectDB {
             conn = DriverManager.getConnection("jdbc:mysql://146.169.35.107/data?"
                     + "user=root&password=root");
             stmt = conn.createStatement();
-            stmt.setFetchSize(3000000);
+            stmt.setFetchSize(size);
             long ts = System.currentTimeMillis();
             Case c = new Case();
             String sql = c.getCase(number);
-            
-          //  System.out.println(sql);
+
+            //  System.out.println(sql);
             //start = temp + 1;
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -403,8 +403,11 @@ public class ConnectDB {
         try {
             ConnectDB db = new ConnectDB();
 
-            db.newsSelect(Integer.parseInt(args[0]));
+            int count = Integer.parseInt(args[1]);
 
+            for (int i = 0; i < count; i++) {
+                db.newsSelect(Integer.parseInt(args[0]), Integer.parseInt(args[2]));
+            }
         } catch (Exception ex) {
             Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
         }
