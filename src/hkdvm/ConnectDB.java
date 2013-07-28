@@ -303,8 +303,6 @@ public class ConnectDB {
 
     }
 
-
-
     public void select(int b) throws Exception {
         Connection conn = null;
         Statement stmt = null;
@@ -368,21 +366,50 @@ public class ConnectDB {
 
     }
 
+    public void newsSelect(int number) throws Exception {
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://146.169.35.107/data?"
+                    + "user=root&password=root");
+            stmt = conn.createStatement();
+            stmt.setFetchSize(3000000);
+            long ts = System.currentTimeMillis();
+            Case c = new Case();
+            String sql = c.getCase(number);
+            
+          //  System.out.println(sql);
+            //start = temp + 1;
+            ResultSet rs = stmt.executeQuery(sql);
+
+            System.out.println("total time is " + (System.currentTimeMillis() - ts));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        //  }
+
+
+    }
+
     public static void main(String[] args) {
         try {
             ConnectDB db = new ConnectDB();
-         //   System.out.println(args[1]);
-            int i = 0;
-            while(i < Integer.parseInt(args[1])){
-                db.select(Integer.parseInt(args[0]));
-                i++;
-            }
-            
+
+            db.newsSelect(Integer.parseInt(args[0]));
+
         } catch (Exception ex) {
             Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-           
-         
+
+
 
     }
 }
