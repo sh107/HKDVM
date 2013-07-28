@@ -384,6 +384,15 @@ public class ConnectDB {
             //start = temp + 1;
             ResultSet rs = stmt.executeQuery(sql);
 
+            int count = 0;
+            while (rs.next()) {
+                count++;
+                if (count % 500000 == 0) {
+                    System.out.println(count);
+                }
+            }
+            System.out.println("total number is " + count);
+
             System.out.println("total time is " + (System.currentTimeMillis() - ts));
         } catch (SQLException e) {
             e.printStackTrace();
