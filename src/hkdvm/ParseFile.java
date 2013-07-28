@@ -21,9 +21,10 @@ import java.util.logging.Logger;
 public class ParseFile {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        String myDirectoryPath = "C:\\Users\\Sijin\\Desktop\\data\\raw";
+        String myDirectoryPath = "D:\\HKDVM data\\raw";
         //   String myDirectoryPath = "C:\\Users\\Sijin\\Desktop\\data";
         int number = 0;
+        Long count = 0L;
         File dir = new File(myDirectoryPath);
         for (File child : dir.listFiles()) {
             // Do something with child
@@ -33,7 +34,7 @@ public class ParseFile {
             CSVReader csvReader = new CSVReader(new FileReader(csvFilename));
             String[] row = null;
 
-            File file = new File("D:\\data\\modified1\\" + number + ".csv");
+            File file = new File("D:\\HKDVM data\\modified2\\" + number + ".csv");
 
             // if file doesnt exists, then create it
             if (!file.exists()) {
@@ -47,31 +48,33 @@ public class ParseFile {
 
                 if (!row[0].trim().equalsIgnoreCase("TRIAL_NAME")) {
                     try {
-
-                    bw.write(row[0].trim());
-                    bw.write(",");
-                    bw.write(row[1].trim());
-                    bw.write(",");
-                    bw.write(row[2].trim());
-                    bw.write(",");
-                    bw.write(row[3].trim());
-                    bw.write(",");
-                    bw.write(row[4].trim());
-                    bw.write(",");
-                    bw.write(row[5].trim());
-                    bw.write(",");
-                    bw.write(row[6].trim());
-                    bw.write(",");
-                    bw.write(row[7].trim());
-                    bw.write(",");
-                    bw.write(row[8].trim());
-                    bw.write(",");
-                    bw.write(row[9].trim());
-                    bw.write(",");
-                    bw.write(row[10].trim());
-                    bw.write(",");
-                    bw.write(row[11].trim());
-                    bw.write("\n");
+                        count++;
+                        bw.write(count.toString());
+                        bw.write(",");
+                        bw.write(row[0].trim());
+                        bw.write(",");
+                        bw.write(row[1].trim());
+                        bw.write(",");
+                        bw.write(row[2].trim());
+                        bw.write(",");
+                        bw.write(row[3].trim());
+                        bw.write(",");
+                        bw.write(row[4].trim());
+                        bw.write(",");
+                        bw.write(row[5].trim());
+                        bw.write(",");
+                        bw.write(row[6].trim());
+                        bw.write(",");
+                        bw.write(row[7].trim());
+                        bw.write(",");
+                        bw.write(row[8].trim());
+                        bw.write(",");
+                        bw.write(row[9].trim());
+                        bw.write(",");
+                        bw.write(row[10].trim());
+                        bw.write(",");
+                        bw.write(row[11].trim());
+                        bw.write("\n");
 
                     } catch (Exception ex) {
                         Logger.getLogger(ReadFile.class.getName()).log(Level.SEVERE, null, ex);
